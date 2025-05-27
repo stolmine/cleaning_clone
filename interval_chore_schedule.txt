@@ -1,0 +1,175 @@
+Day 1:
+  - dishes
+  - litter
+  - sweep + mop
+
+Day 2:
+  - dishes
+  - kitchen counters
+  - litter
+  - trash + recycling
+
+Day 3:
+  - dishes
+  - litter
+
+Day 4:
+  - dishes
+  - litter
+  - personal laundry
+  - tidy + dust dining room
+
+Day 5:
+  - dishes
+  - litter
+  - sweep + mop
+
+Day 6:
+  - bathroom surfaces + floor
+  - dishes
+  - litter
+  - tidy + dust bedroom
+  - trash + recycling
+
+Day 7:
+  - clean mirrors
+  - dishes
+  - litter
+  - tidy + dust living room
+  - tidy + dust office
+  - wash towels
+
+Day 8:
+  - dishes
+  - litter
+
+Day 9:
+  - dishes
+  - kitchen counters
+  - litter
+  - sweep + mop
+  - trash + recycling
+
+Day 10:
+  - dishes
+  - litter
+
+Day 11:
+  - dishes
+  - litter
+  - personal laundry
+  - tidy + dust dining room
+  - wash sheets
+
+Day 12:
+  - dishes
+  - litter
+  - sweep + mop
+
+Day 13:
+  - bathroom surfaces + floor
+  - dishes
+  - litter
+  - tidy + dust bedroom
+  - trash + recycling
+
+Day 14:
+  - clean tub
+  - dishes
+  - litter
+
+Day 15:
+  - dishes
+  - litter
+  - tidy + dust living room
+  - tidy + dust office
+  - wash towels
+
+Day 16:
+  - dishes
+  - litter
+  - sweep + mop
+
+Day 17:
+  - dishes
+  - kitchen counters
+  - litter
+  - trash + recycling
+
+Day 18:
+  - dishes
+  - litter
+
+Day 19:
+  - dishes
+  - litter
+  - personal laundry
+  - tidy + dust dining room
+
+Day 20:
+  - dishes
+  - fridge cleanout + surfaces
+  - litter
+  - sweep + mop
+
+Day 21:
+  - bathroom surfaces + floor
+  - dishes
+  - litter
+  - tidy + dust bedroom
+  - trash + recycling
+
+Day 22:
+  - clean mirrors
+  - dishes
+  - litter
+  - tidy + dust living room
+  - tidy + dust office
+  - wash towels
+
+Day 23:
+  - dishes
+  - litter
+  - sweep + mop
+
+Day 24:
+  - dishes
+  - litter
+
+Day 25:
+  - dishes
+  - kitchen counters
+  - litter
+  - trash + recycling
+
+Day 26:
+  - dishes
+  - litter
+  - wash sheets
+
+Day 27:
+  - dishes
+  - litter
+  - personal laundry
+  - sweep + mop
+  - tidy + dust dining room
+
+Day 28:
+  - dishes
+  - litter
+  - trash + recycling
+
+Day 29:
+  - bathroom surfaces + floor
+  - clean tub
+  - dishes
+  - litter
+  - tidy + dust bedroom
+  - tidy + dust living room
+  - tidy + dust office
+  - wash towels
+
+Day 30:
+  - dishes
+  - litter
+
