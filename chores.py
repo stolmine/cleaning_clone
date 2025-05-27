@@ -1,5 +1,7 @@
 import csv
 from collections import defaultdict
+from math import floor
+from itertools import cycle
 
 # Load chores from CSV
 chore_data = {}
@@ -11,7 +13,7 @@ with open("updated_chore_schedule.csv", newline='') as csvfile:
             "frequency": int(row["frequency_per_month"])
         }
 
-# Define chore groups — pair tidy with each dust chore individually
+# Define grouped chores
 group_definitions = {
     "tidy + dust living room": ["tidy", "dust living room"],
     "tidy + dust dining room": ["tidy", "dust dining room"],
@@ -23,7 +25,7 @@ group_definitions = {
     "bathroom surfaces + floor": ["bathroom surfaces", "bathroom floor"]
 }
 
-# Build list of grouped chores with adjusted frequencies
+# Create grouped tasks and track used chores
 grouped_tasks = []
 used = set()
 
@@ -43,75 +45,78 @@ for group_name, members in group_definitions.items():
             chore_data[ch]["frequency"] -= freq
             used.add(ch)
 
-# Add remaining ungrouped tasks
+# Add remaining ungrouped chores
 for chore, info in chore_data.items():
-    if chore in used or info["frequency"] <= 0:
-        continue
-    for _ in range(info["frequency"]):
-        grouped_tasks.append({
-            "chore": chore,
-            "difficulty": info["difficulty"]
-        })
+    if info["frequency"] > 0:
+        for _ in range(info["frequency"]):
+            grouped_tasks.append({
+                "chore": chore,
+                "difficulty": info["difficulty"]
+            })
 
-from math import ceil
-from collections import defaultdict
-
-# Count frequencies of tasks in grouped_tasks
-freq_count = defaultdict(int)
-for t in grouped_tasks:
-    freq_count[t["chore"]] += 1
-
-# Organize tasks by chore name for scheduling evenly
+# Group tasks by chore for spacing
 tasks_by_chore = defaultdict(list)
 for task in grouped_tasks:
     tasks_by_chore[task["chore"]].append(task)
 
-# Prepare schedule containers
+# Initialize schedule
 days = defaultdict(list)
 day_difficulties = [0] * 30
-limit_per_day = 15  # Adjusted daily difficulty limit
-
 unplaced_tasks = []
 
-# Function to find next suitable day for a task, checking duplicates and difficulty limit
-def find_day_for_task(start_day, chore, difficulty):
-    for offset in range(30):
-        day = (start_day + offset) % 30
-        chores_today = {t["chore"] for t in days[day]}
-        if (day_difficulties[day] + difficulty <= limit_per_day) and (chore not in chores_today):
-            return day
-    return None  # no suitable day found
+# Check if a chore already exists today or the day before/after
+def is_valid_day(day, chore):
+    today = {t["chore"] for t in days[day]}
+    prev_day = {t["chore"] for t in days[day - 1]} if day > 0 else set()
+    next_day = {t["chore"] for t in days[day + 1]} if day < 29 else set()
+    return chore not in today and chore not in prev_day and chore not in next_day
 
-# Assign tasks evenly spaced across days
-for chore, tasks in tasks_by_chore.items():
-    freq = len(tasks)
+# Assign tasks at even intervals and smooth difficulty
+for chore, chore_tasks in tasks_by_chore.items():
+    freq = len(chore_tasks)
     if freq == 0:
         continue
     interval = 30 / freq
-    for i, task in enumerate(tasks):
-        approx_day = int(round(i * interval)) % 30
-        day = find_day_for_task(approx_day, chore, task["difficulty"])
-        if day is None:
-            # fallback
-            day = find_day_for_task(0, chore, task["difficulty"])
-            if day is None:
-                unplaced_tasks.append(task)
-                continue
-        days[day].append(task)
-        day_difficulties[day] += task["difficulty"]
+    offsets = [floor(i * interval) for i in range(freq)]
+    attempts = cycle(range(30))
 
-# Write output to a text file with tasks sorted ascending by difficulty per day
+    for i, task in enumerate(chore_tasks):
+        placed = False
+        base_day = offsets[i]
+
+        # Try preferred day and shift forward if needed
+        for delta in range(30):
+            day = (base_day + delta) % 30
+            if is_valid_day(day, task["chore"]) and day_difficulties[day] + task["difficulty"] <= 15:
+                days[day].append(task)
+                day_difficulties[day] += task["difficulty"]
+                placed = True
+                break
+
+        if not placed:
+            for day in range(30):
+                if task["chore"] not in [t["chore"] for t in days[day]] and day_difficulties[day] + task["difficulty"] <= 15:
+                    days[day].append(task)
+                    day_difficulties[day] += task["difficulty"]
+                    placed = True
+                    break
+
+        if not placed:
+            unplaced_tasks.append(task)
+
+# Sort tasks by ascending difficulty per day and write to file
 with open("monthly_chore_schedule.txt", "w") as f:
     for day in range(30):
-        f.write(f"Day {day + 1} (Total difficulty: {day_difficulties[day]})\n")
-        sorted_tasks = sorted(days[day], key=lambda t: t["difficulty"])
+        sorted_tasks = sorted(days[day], key=lambda x: x["difficulty"])
+        total_difficulty = sum(t["difficulty"] for t in sorted_tasks)
+        f.write(f"Day {day + 1} (Total difficulty: {total_difficulty})\n")
         for task in sorted_tasks:
             f.write(f"  - {task['chore']} (difficulty {task['difficulty']})\n")
         f.write("\n")
 
     if unplaced_tasks:
-        f.write("Unplaced Tasks (could not be scheduled due to difficulty or duplicates):\n")
+        f.write("Unplaced Tasks (could not be scheduled due to constraints):\n")
         for task in sorted(unplaced_tasks, key=lambda t: t["difficulty"]):
             f.write(f"  - {task['chore']} (difficulty {task['difficulty']})\n")
 
-print("✅ Schedule saved with tidy + individual dusting tasks grouped separately")
+print("✅ Balanced and spaced schedule written to 'monthly_chore_schedule.txt'")
