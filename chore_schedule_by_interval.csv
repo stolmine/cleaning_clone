@@ -1,10 +1,12 @@
 chore,interval
 dishes,daily
-tidy + dust living room,weekly
-tidy + dust dining room,weekly
-tidy + dust bedroom,weekly
-tidy + dust office,weekly
-sweep + mop,twice_weekly
+dust living room,monthly
+dust dining room,monthly
+dust bedroom,monthly
+dust office,monthly
+tidy,daily
+sweep,weekly
+mop,biweekly
 bathroom surfaces + floor,weekly
 clean tub,biweekly
 clean mirrors,biweekly
@@ -14,4 +16,4 @@ trash + recycling,twice_weekly
 fridge cleanout + surfaces,monthly
 wash towels,weekly
 kitchen counters,weekly
-litter,daily
+litter,twice_weekly
