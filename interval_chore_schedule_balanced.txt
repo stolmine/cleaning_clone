@@ -3,40 +3,43 @@ Day 1:
   - tidy
 
 Day 2:
-  - dishes
-  - dust dining room
-  - kitchen counters
-  - litter
-  - tidy
-  - trash + recycling
+  - dishes /
+  - dust dining room /
+  - kitchen counters /
+  - litter /
+  - tidy /
+  - trash + recycling /
+  - sweep /
+  - bathroom /
+  - office cleanup /
 
 Day 3:
-  - dishes
-  - tidy
+  - dishes /
+  - tidy /
 
 Day 4:
-  - dishes
+  - dishes /
   - personal laundry
-  - sweep
-  - tidy
+  - sweep /
+  - tidy /
 
 Day 5:
-  - dishes
+  - dishes /
   - tidy
 
 Day 6:
-  - bathroom surfaces + floor
-  - dishes
-  - litter
-  - tidy
-  - trash + recycling
+  - bathroom surfaces + floor /
+  - dishes /
+  - litter /
+  - tidy /
+  - trash + recycling /
 
 Day 7:
   - clean mirrors
-  - dishes
+  - dishes /
   - mop
-  - sweep
-  - tidy
+  - sweep /
+  - tidy /
   - wash towels
 
 Day 8:
@@ -46,7 +49,7 @@ Day 8:
 Day 9:
   - dishes
   - kitchen counters
-  - litter
+  - litter /
   - tidy
   - trash + recycling
 

@@ -157,11 +157,11 @@ for _ in range(MAX_ITERATIONS):
 # Write final balanced schedule
 with open("interval_chore_schedule_balanced.txt", "w") as f:
     for day in range(NUM_DAYS):
-        f.write(f"Day {day + 1}:\n")
+        f.write(f"- [ ] Day {day + 1}:\n")
         chores = sorted(schedule[day])
         if chores:
             for chore in chores:
-                f.write(f"  - {chore}\n")
+                f.write(f"  - [ ] {chore}\n")
         else:
             f.write("  (no chores)\n")
         f.write("\n")
